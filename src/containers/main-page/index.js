@@ -1,21 +1,26 @@
 import React, { Component } from 'react';
 import CardList from './components/card-list';
 import Form from './components/form';
+import Counter from './components/counter';
 
 export default class MainPage extends Component {
   state = {
-    cards: []
+    users: [],
+    count: -1
   };
 
-  addNewCard = cardInfo => {
-    this.setState({ cards: [...this.state.cards, cardInfo] });
+  addSearchedUsers = searchData => {
+    let users = searchData.items;
+    let count = searchData.total_count;
+    this.setState({ users: [...users], count: count });
   };
 
   render() {
     return (
-      <div>
-        <Form onSubmit={this.addNewCard} />
-        <CardList cards={this.state.cards} />
+      <div style={{ margin: 20 }}>
+        <Form onSubmit={this.addSearchedUsers} />
+        <Counter count={this.state.count} />
+        <CardList cards={this.state.users} />
       </div>
     );
   }

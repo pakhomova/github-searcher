@@ -6,7 +6,7 @@ export default class CardList extends Component {
     return (
       <div>
         {this.props.cards.map(card => (
-          <Card {...card} />
+          <Card key={card.id.toString()} {...card} />
         ))}
       </div>
     );

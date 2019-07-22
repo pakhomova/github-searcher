@@ -11,24 +11,25 @@ export default class Form extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    axios.get(`https://api.github.com/users/${this.state.username}`).then(resp => {
+    axios.get(`https://api.github.com/search/users?q=${this.state.username}+in:login`).then(resp => {
       this.props.onSubmit(resp.data);
+      console.log(resp.data);
       this.setState({ username: '' });
     });
   };
 
   render() {
     return (
-      <form className="ui form" onSubmit={this.handleSubmit}>
+      <form className="ui form">
         <input
           type="text"
           value={this.state.username}
           onChange={this.onInputChange}
-          placeholder="GitHub username"
+          placeholder="Enter GitHub username"
           required
         />
-        <button className="ui button" type="submit">
-          Add card
+        <button className="ui button" onClick={this.handleSubmit} style={{ marginTop: 5, marginBottom: 5 }}>
+          Find Users
         </button>
       </form>
     );
