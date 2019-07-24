@@ -6,7 +6,7 @@ export default class CardList extends Component {
     return (
       <div>
         {this.props.cards.map(card => (
-          <Card key={card.id.toString()} {...card} />
+          <Card key={card.id.toString()} onLinkClick={this.props.onUserClick} {...card} />
         ))}
       </div>
     );
